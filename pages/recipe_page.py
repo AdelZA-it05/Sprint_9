@@ -46,10 +46,12 @@ class RecipePage(BasePage):
         image_dir = parent_dir/"assets"
         file_path = str(image_dir) + "\капреза.jpg"
 
+        # загрузка файла
         self.scroll_element(RecipePageLocators.button_create_recipe)
-        file_input = self.driver.find_element(*RecipePageLocators.input_file)
+        file_input = self.find_element_base(RecipePageLocators.input_file)
         file_input.send_keys(file_path)
 
+        # создание рецепта
         self.scroll_element(RecipePageLocators.button_create_recipe)
         self.click_element_locator(RecipePageLocators.button_create_recipe)
 

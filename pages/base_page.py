@@ -20,6 +20,9 @@ class BasePage:
     def go_to_url(self, url):
         self.driver.get(url)
 
+    @allure.step('поиск элемента')
+    def find_element_base(self, locator):
+        return self.driver.find_element(*locator)
     @allure.step('поиск элемента с ожиданием')
     def find_element_with_wait(self, locator):
         self.wait.until(expected_conditions.visibility_of_element_located(locator))
