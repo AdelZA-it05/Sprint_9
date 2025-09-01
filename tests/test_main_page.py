@@ -1,7 +1,11 @@
+import time
+
 import allure
 
 import data
 from pages.main_page import MainPage
+
+from conftest import driver
 
 
 class TestMainPage():

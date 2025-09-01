@@ -1,6 +1,5 @@
 # Глобальные переменные
 BASE_URL = 'https://foodgram-frontend-1.prakticum-team.ru/'
-
 # константы
 TEXT_ON_MAIN_PAGE = 'Войти на сайт'
 TEXT_ON_LOGIN_BUTTON = 'Войти'
