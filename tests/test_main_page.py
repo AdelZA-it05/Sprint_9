@@ -5,6 +5,8 @@ import allure
 import data
 from pages.main_page import MainPage
 
+from conftest import driver, createaccount
+
 
 class TestMainPage():
 
@@ -34,25 +36,19 @@ class TestMainPage():
     @allure.title('Авторизация')
     @allure.description('Проверка произошёл ли переход на главную страницу.')
     @allure.testcase('Тест-кейс из Sprint_9')
-    def test_login_account_main_page(self, driver):
+    def test_login_account_main_page(self, driver, createaccount):
         testloginaccount = MainPage(driver)
-        testloginaccount.go_to_url(data.BASE_URL)
 
-        account_param = testloginaccount.create_account()
-
-        testloginaccount.login_account(account_param[3], account_param[4])
+        testloginaccount.login_account(createaccount[3], createaccount[4])
 
         assert testloginaccount.get_text_from_recipes_text() == data.TEXT_RECIPES
 
     @allure.title('Авторизация')
     @allure.description('Проверка отображается ли кнопка «Выход».')
     @allure.testcase('Тест-кейс из Sprint_9')
-    def test_login_account_logout_button(self, driver):
+    def test_login_account_logout_button(self, driver, createaccount):
         testloginaccount = MainPage(driver)
-        testloginaccount.go_to_url(data.BASE_URL)
 
-        account_param = testloginaccount.create_account()
-
-        testloginaccount.login_account(account_param[3], account_param[4])
+        testloginaccount.login_account(createaccount[3], createaccount[4])
 
         assert testloginaccount.get_text_from_logaut_button() == data.TEXT_ON_LOGAUT_BUTTON

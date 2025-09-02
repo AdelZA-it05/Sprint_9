@@ -5,14 +5,17 @@
 ##   отдельный контейнер с браузером согласно конфигу browsers.json.
 ## - Selenoid UI (порт 8080) показывает активные/прошедшие сессии, позволяет скачивать видео.
 ## - tests — контейнер‑тест‑раннер, который подключается к Selenoid по внутреннему DNS.
+##
+## Важно: на Apple Silicon (arm64) образы Selenoid/браузеров чаще под amd64, поэтому
+## используется эмуляция (qemu). Это нормально, но может работать медленнее.
 services:
   selenoid:
     # Основной хаб Selenoid (динамически запускает контейнеры с браузерами)
     image: aerokube/selenoid:latest-release
-    # Принудительно amd64: официальные образы Selenoid собраны под amd64
+    # Принудительно amd64: официальные образы Selenoid собраны под amd64; на Apple Silicon используется эмуляция
     platform: linux/amd64
     container_name: selenoid
-    # Аргументы запуска Selenoid
+    # Аргументы запуска Selenoid (список, чтобы избежать проблем парсинга)
     command: [
       "-conf", "/etc/selenoid/browsers.json",
       "-video-output-dir", "/opt/selenoid/video",
@@ -33,8 +36,10 @@ services:
       - ./selenoid/video:/opt/selenoid/video
       - ./selenoid/logs:/opt/selenoid/logs
     environment:
+      # Важно для macOS: путь к видео должен быть расшарен в Docker Desktop (Settings → Resources → File sharing)
       # Параметризуем в CI: OVERRIDE_VIDEO_OUTPUT_DIR=$GITHUB_WORKSPACE/selenoid/video
-      - OVERRIDE_VIDEO_OUTPUT_DIR=${OVERRIDE_VIDEO_OUTPUT_DIR:-/Users/sergeytsarev/selenium-selenoid-demo/selenoid/video}
+      # - OVERRIDE_VIDEO_OUTPUT_DIR=${OVERRIDE_VIDEO_OUTPUT_DIR:-/Users/sergeytsarev/selenium-selenoid-demo/selenoid/video}
+      - OVERRIDE_VIDEO_OUTPUT_DIR=${OVERRIDE_VIDEO_OUTPUT_DIR:-/YPracticum/Spr_9/video}
     networks:
       - grid
     healthcheck:
@@ -68,7 +73,7 @@ services:
       # Подключение к Selenoid по DNS‑имени внутри сети compose
       - SELENOID_URL=http://selenoid:4444/wd/hub
       # Имя используется для удобного имени видеофайла   и отображается в UI
-      - TEST_NAME=test_foodgram
+      - TEST_NAME=test_google
     volumes:
       # Монтируем проект для запуска исходников без   пересборки образа
       - ./:/app:rw

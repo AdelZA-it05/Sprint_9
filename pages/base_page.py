@@ -1,3 +1,5 @@
+import time
+
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.action_chains import ActionChains
@@ -182,9 +184,9 @@ class BasePage:
 
     @allure.step('клик на кнопку войти')
     def click_login_button(self):
-        self.wait_element_to_clickable(MainPageLocators.click_login_button)
         self.click_element_locator(MainPageLocators.click_login_button)
 
+    @allure.step('авторизация')
     def login_account(self, email, password):
         self.wait_to_element(MainPageLocators.main_page_text)
 
@@ -193,6 +195,6 @@ class BasePage:
 
         self.wait_to_element(MainPageLocators.login_password)
         self.put_login_password(password)
+        time.sleep(5)
 
-        self.wait_element_to_clickable(MainPageLocators.click_login_button)
         self.click_login_button()

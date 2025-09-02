@@ -5,6 +5,9 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
+import data
+from pages.base_page import BasePage
+
 
 @pytest.fixture
 def driver():
@@ -37,3 +40,14 @@ def driver():
     # Дадим Selenoid время завершить запись видео
     time.sleep(1)
     driver.quit()
+
+@pytest.fixture
+def createaccount(driver):
+    driver.get(data.BASE_URL)
+    createaccount = BasePage(driver).create_account()
+    return createaccount
+
+@pytest.fixture
+def loginaccount(driver, createaccount):
+    loginaccount = BasePage(driver).login_account(createaccount[3], createaccount[4])
+    return loginaccount
