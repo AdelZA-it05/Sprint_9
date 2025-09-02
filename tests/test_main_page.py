@@ -5,8 +5,6 @@ import allure
 import data
 from pages.main_page import MainPage
 
-from conftest import driver, createaccount
-
 
 class TestMainPage():
 

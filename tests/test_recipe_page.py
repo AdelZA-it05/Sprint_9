@@ -3,8 +3,6 @@ import allure
 import data
 from pages.recipe_page import RecipePage
 
-from conftest import driver, createaccount, loginaccount
-
 
 class TestRecipePage():
 
