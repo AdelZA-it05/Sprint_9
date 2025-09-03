@@ -47,7 +47,7 @@ class RecipePage(BasePage):
         self.add_text_to_web_element(web_inredient_name, data.RECIPE_INGREDIENT)
         # выбор ингредиента из списка поиска
         parent_div = self.find_element_with_wait(RecipePageLocators.ingredients_list)
-        first_child_div = parent_div.find_element(By.CSS_SELECTOR, "div:first-child")
+        first_child_div = parent_div.find_element(*RecipePageLocators.recipe_ingredient)
         first_child_div.click()
         # добавление ингредиента
         self.click_element_locator(RecipePageLocators.click_add_ingredient)

@@ -6,6 +6,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 import data
+from pages.main_page import MainPage
 from pages.base_page import BasePage
 
 
@@ -44,10 +45,10 @@ def driver():
 @pytest.fixture
 def createaccount(driver):
     driver.get(data.BASE_URL)
-    createaccount = BasePage(driver).create_account()
+    createaccount = MainPage(driver).create_account()
     return createaccount
 
 @pytest.fixture
 def loginaccount(driver, createaccount):
-    loginaccount = BasePage(driver).login_account(createaccount[3], createaccount[4])
+    loginaccount = MainPage(driver).login_account(createaccount[3], createaccount[4])
     return loginaccount

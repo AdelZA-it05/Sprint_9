@@ -195,6 +195,5 @@ class BasePage:
 
         self.wait_to_element(MainPageLocators.login_password)
         self.put_login_password(password)
-        time.sleep(5)
 
         self.click_login_button()

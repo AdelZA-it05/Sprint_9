@@ -17,3 +17,5 @@ class RecipePageLocators:
 
     recipe_card_name = By.XPATH, "//h1[@class='styles_single-card__title__2QMPq']"  # карточка рецепта: наименование
     recipe_card_edit = By.XPATH, "//a[@class[contains(.,'style_link__1kPh8 styles_single-card__edit__Mb_wc')]]"  # карточка рецепта: редактирование
+
+    recipe_ingredient = By.CSS_SELECTOR, "div:first-child"
