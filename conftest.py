@@ -38,8 +38,6 @@ def driver():
     )
 
     yield driver
-    # Дадим Selenoid время завершить запись видео
-    time.sleep(1)
     driver.quit()
 
 @pytest.fixture
